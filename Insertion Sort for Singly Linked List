@@ -1,0 +1,49 @@
+*Link list node
+struct Node {
+	int data;
+	struct Node *next;
+	Node(int x) {
+		data = x;
+		next = NULL;
+	}
+};*/
+
+class Solution
+{
+    public:
+    Node* insertionSort(struct Node* head_ref)
+    {
+        struct Node *itr, *preItr, *head, *sorted{head_ref};
+  head_ref = head_ref->next;
+  sorted->next = NULL;
+  while(head_ref){
+     head = head_ref; // Store head_ref to head
+     head_ref = head_ref->next;
+     itr = sorted; // Initialise itr
+     preItr = NULL; // Nullify preItr.
+     // iterate until head is suitable before itr and after preItr
+     while(itr != NULL && head->data > itr->data){
+         preItr = itr;
+         itr = itr->next;
+     }
+     // insert head in last place of sorted list
+     if(itr == NULL){
+         preItr->next = head;
+         head->next = NULL;
+     }
+     // insert head in first place of sorted list
+     else if(preItr == NULL){
+         head->next = sorted;
+         sorted = head;
+     }
+     // insert head in somewhere middle of sorted list
+     else{
+         preItr->next = head;
+         head->next = itr;
+     }
+  }
+  return sorted;
+        //code here
+    }
+    
+};
