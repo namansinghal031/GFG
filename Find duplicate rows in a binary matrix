@@ -1,0 +1,21 @@
+class Solution
+{   
+    public:
+    vector<int> repeatedRows(vector<vector<int>> &matrix, int M, int N) 
+    { 
+        // Your code here
+      map<vector<int>,int> track;
+   vector<int> ans, row;
+   for(int i{0}; i < M; i++){
+       row.clear();
+       for(int j{0}; j < N; j++){
+           row.push_back(matrix[i][j]);
+       }
+       track[row]++;
+       if(track[row] > 1){
+           ans.push_back(i);
+       }
+   }
+   return ans;
+    } 
+};
