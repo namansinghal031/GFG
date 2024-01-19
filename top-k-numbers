@@ -1,0 +1,47 @@
+class Solution {
+  public:
+    vector<vector<int>> kTop(vector<int>& arr, int N, int K) {
+        
+        vector<vector<int>>ans;
+        
+        unordered_map<int,int>mp;
+    
+        map<int,set<int>,greater<int>>fp;
+        
+        for(int i=0;i<N;i++)
+        {
+            mp[arr[i]]++;
+            
+            fp[mp[arr[i]]].insert(arr[i]);
+            
+            if(fp[mp[arr[i]]-1].count(arr[i]))
+            {
+                fp[mp[arr[i]]-1].erase(arr[i]);
+            }
+            
+            int temp = 0 ;
+            
+            auto it = fp.begin();
+            
+            vector<int>t;
+            
+            while(temp<K && it!=fp.end())
+            {
+                auto st = it->second.begin();
+                
+                while(temp<K && st!=it->second.end())
+                {
+                    t.push_back(*st);
+                    temp++;
+                    
+                    st++;
+                }
+                it++;
+            }
+            
+            ans.push_back(t);
+        }
+        
+        return ans;
+    }
+};
